@@ -1,4 +1,3 @@
-Enter file contents here
 name: build
 on:
   push:
@@ -9,6 +8,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Napraw strukture folderow
+        run: |
+          J=src/main/java/com/sharedwaypoints
+          R=src/main/resources
+          mkdir -p $J/screen $R/assets/sharedwaypoints/lang gradle/wrapper
+          for f in BeamRenderer Config HudMarkers SharedWaypointsClient Sharing Teleport Waypoint WaypointStore; do
+            if [ -f $f.java ]; then mv $f.java $J/; fi
+          done
+          for f in FriendsScreen SettingsScreen WaypointEditScreen WaypointListScreen; do
+            if [ -f $f.java ]; then mv $f.java $J/screen/; fi
+          done
+          for f in en_us pl_pl; do
+            if [ -f $f.json ]; then mv $f.json $R/assets/sharedwaypoints/lang/; fi
+          done
+          if [ -f fabric.mod.json ]; then mv fabric.mod.json $R/; fi
+          for f in gradle-wrapper.jar gradle-wrapper.properties; do
+            if [ -f $f ]; then mv $f gradle/wrapper/; fi
+          done
+          find . -path ./.git -prune -o -type f -print | sort
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
