@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "sharedwaypoints",
+  "version": "${version}",
+  "name": "Shared Waypoints",
+  "description": "Waypointy pod klawiszem I, zarządzanie pod G, udostępnianie innym graczom z modem przez czat (bez moda serwerowego).",
+  "authors": ["You"],
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["com.sharedwaypoints.SharedWaypointsClient"]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.9",
+    "minecraft": "~1.21.4",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
